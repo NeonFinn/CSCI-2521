@@ -12,11 +12,13 @@ int main()
 {
     float length; // make sure the variables are floats
     float width;
-    
-    cout << "Enter the length of the rectangle: " << endl;
+
+    cout << "This program will calculate the perimeter of a rectangle." << endl; // intro message
+
+    cout << "Enter the length of the rectangle: ";
     cin >> length;
 
-    cout << "Enter the width of the rectangle: " << endl;
+    cout << "Enter the width of the rectangle: ";
     cin >> width;
 
     float perimeter = 2 * (length + width); // calculate perimeter

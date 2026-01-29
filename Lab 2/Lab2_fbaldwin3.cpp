@@ -7,11 +7,22 @@
 
 #include<iostream>
 #include<string>
-#include<cstdlib>
-
 using namespace std;
 
 int main()
 {
+    int length; // make sure the variables are integers
+    int width;
     
+    cout << "Enter the length of the recangle: " << endl;
+    cin >> length;
+
+    cout << "Enter the width of the recangle: " << endl;
+    cin >> width;
+
+    int perimiter = 2 * (length + width); // calculate perimiter
+
+    cout << "The perimiter of the recangle is: " << perimiter << endl;
+
+    return 0;
 }

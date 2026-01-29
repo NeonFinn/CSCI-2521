@@ -6,23 +6,22 @@
  */
 
 #include<iostream>
-#include<string>
 using namespace std;
 
 int main()
 {
-    int length; // make sure the variables are integers
-    int width;
+    float length; // make sure the variables are floats
+    float width;
     
-    cout << "Enter the length of the recangle: " << endl;
+    cout << "Enter the length of the rectangle: " << endl;
     cin >> length;
 
-    cout << "Enter the width of the recangle: " << endl;
+    cout << "Enter the width of the rectangle: " << endl;
     cin >> width;
 
-    int perimiter = 2 * (length + width); // calculate perimiter
+    float perimeter = 2 * (length + width); // calculate perimeter
 
-    cout << "The perimiter of the recangle is: " << perimiter << endl;
+    cout << "The perimeter of the rectangle is: " << perimeter << endl;
 
     return 0;
 }

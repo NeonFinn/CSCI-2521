@@ -13,6 +13,8 @@ void ParseInput(int number);
 bool TestValidity();
 void OutputValidity(bool isValid);
 
+// use vectors and pushback to get all elemets in order before
+
 int main()
 {
     if (!DoesUserHaveNumber()) // if user does not have a number to check exit program, otherwise keep going

@@ -15,6 +15,16 @@ using namespace std;
 void arraySolution();
 void vectorSolution();
 
+// array helper function prototypes
+float calculateAverage(const int arr[], int size);
+int findMax(const int arr[], int size);
+int findMin(const int arr[], int size);
+
+// vector helper function prototypes
+float calculateAverage(const vector<int>& vec);
+int findMax(const vector<int>& vec);
+int findMin(const vector<int>& vec);
+
 /**
  * @brief: Entry point of program
  * @param: None
@@ -36,15 +46,10 @@ int main()
 void arraySolution()
 {
     int scores[10]; // static array
-
     int score = 0;
-    int sum = 0;
-    int highest = 0;
-    int lowest = 0;
 
     // title
-    cout << "\n";
-    cout << "Array Solution\n";
+    cout << "\nArray Solution\n";
     cout << "----------------------------------\n";
 
     // loop to get 10 valid scores
@@ -62,25 +67,12 @@ void arraySolution()
 
         // once valid
         scores[i] = score;
-        sum += score;
-
-        // set highest and lowest score
-        if (i == 0)
-        {
-            highest = score;
-            lowest = score;
-        }
-        else
-        {
-            if (score > highest)
-                highest = score;
-
-            if (score < lowest)
-                lowest = score;
-        }
     }
-        
-    double average = sum / 10.0;
+
+    // Use helper functions
+    float average = calculateAverage(scores, 10);
+    int highest = findMax(scores, 10);
+    int lowest = findMin(scores, 10);
 
     cout << "\nArray Results:\n";
     cout << "Average: " << average << endl;
@@ -96,15 +88,10 @@ void arraySolution()
 void vectorSolution()
 {
     vector<int> scores; // empty vector
-
     int score = 0;
-    int sum = 0;
-    int highest = 0;
-    int lowest = 0;
 
     // title
-    cout << "\n";
-    cout << "Vector Solution\n";
+    cout << "\nVector Solution\n";
     cout << "----------------------------------\n";
 
     // input loop
@@ -127,47 +114,116 @@ void vectorSolution()
         scores.push_back(score);
     }
 
-    // check if empty
     if (scores.size() == 0)
     {
         cout << "No scores entered.\n";
         return;
     }
 
-    // initialize highest and lowest
-    highest = scores[0];
-    lowest = scores[0];
+    // Use helper functions
+    float average = calculateAverage(scores);
+    int highest = findMax(scores);
+    int lowest = findMin(scores);
 
-    // calculate sum, highest, lowest
-    for (int i = 0; i < scores.size(); i++)
-    {
-        sum += scores[i];
-
-        if (scores[i] > highest)
-            highest = scores[i];
-
-        if (scores[i] < lowest)
-            lowest = scores[i];
-    }
-
-    double average = (double)sum / scores.size();
-
-    // display stats
     cout << "\nVector Results:\n";
     cout << "Average score: " << average << endl;
     cout << "Highest score: " << highest << endl;
     cout << "Lowest score: " << lowest << endl;
 
-    // sort scores
     sort(scores.begin(), scores.end());
 
-    // display sorted scores
     cout << "Sorted scores: ";
-
-    for (int i = 0; i < scores.size(); i++)
-    {
-        cout << scores[i] << " ";
-    }
-
+    for (int x : scores)
+        cout << x << " ";
     cout << endl;
+    cout << endl;
+}
+
+// Array helper functions
+
+/**
+ * @brief Calculates the average of integers in the an array
+ * @param arr The array of integers
+ * @param size Number of elements in the array
+ * @return The average as a float
+ */
+float calculateAverage(const int arr[], int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; i++)
+        sum += arr[i];
+    return sum / (float)size;
+}
+
+/**
+ * @brief Finds the maximum value in an array
+ * @param arr The array of integers
+ * @param size Number of elements in the array
+ * @return The maximum value
+ */
+int findMax(const int arr[], int size)
+{
+    int max = arr[0];
+    for (int i = 1; i < size; i++)
+        if (arr[i] > max)
+            max = arr[i];
+    return max;
+}
+
+/**
+ * @brief Finds the minimum value in an array
+ * @param arr The array of integers
+ * @param size Number of elements in the array
+ * @return The minimum value
+ */
+int findMin(const int arr[], int size)
+{
+    int min = arr[0];
+    for (int i = 1; i < size; i++)
+        if (arr[i] < min)
+            min = arr[i];
+    return min;
+}
+
+// Vector helper function definitions
+
+/**
+ * @brief Calculates the average of the integers in the vector
+ * @param vec The vector of integers
+ * @return The average as a float
+ */
+float calculateAverage(const vector<int>& vec)
+{
+    int sum = 0;
+    for (int x : vec) 
+        sum += x;
+    return sum / (float)vec.size();
+}
+
+/**
+ * @brief Finds the maximum value in a vector
+ * @param vec The vector of integers
+ * @return The maximum value
+ */
+int findMax(const vector<int>& vec)
+{
+    int max = vec[0];
+    for (int val : vec)
+        if (val > max)
+            max = val;
+    return max;
+}
+
+/**
+ * @brief Finds the minimum value in a vector
+ * @param vec The vector of integers
+ * @return The minimum value
+ */
+int findMin(const vector<int>& vec)
+{
+    int min = vec[0];
+    for (int val : vec)
+        if (val < min)
+            min = val;
+    return min;
 }

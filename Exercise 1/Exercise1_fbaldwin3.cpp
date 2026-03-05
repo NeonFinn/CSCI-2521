@@ -1,13 +1,12 @@
 /**
  * @file Exercise1_fbaldwin3.cpp
  * @author Finn Baldwin
- * @date 03/03/26
+ * @date 03/04/26
  * @brief This program validates UPC-A barcodes performing the UPC-A check digit algorithm.
  */
 
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
@@ -21,6 +20,11 @@ int GetProductNumber();
 bool TestValidity(int first, int manufacturer, int product, int last);
 void OutputValidity(int first, int manufacturer, int product, int last, bool isValid);
 
+/**
+ * @brief: Entry point of program
+ * @param: None
+ * @return: 0 (upon completion)
+ */
 int main()
 {
     while (DoesUserHaveNumber())
@@ -40,7 +44,11 @@ int main()
     return 0;
 }
 
-// checks if the user has another number to check
+/**
+ * @brief: Sees if the user has another UPC to check
+ * @param: None
+ * @return: true if the user wants to check a UPC, false otherwise
+ */
 bool DoesUserHaveNumber()
 {
     string answer;
@@ -66,7 +74,11 @@ bool DoesUserHaveNumber()
     }
 }
 
-// gets first number from user
+/**
+ * @brief: Gets first number from user
+ * @param: None
+ * @return: first digit in UPC
+ */
 int GetFirstNumber()
 {
     int firstNumber;
@@ -83,7 +95,11 @@ int GetFirstNumber()
     return firstNumber;
 }
 
-// gets check digit number from user
+/**
+ * @brief: Gets the check digit from user
+ * @param: None
+ * @return: last digit in UPC
+ */
 int GetLastNumber()
 {
     int lastNumber;
@@ -100,14 +116,18 @@ int GetLastNumber()
     return lastNumber;
 }
 
-// gets 5 digit manufacturer number from user
+/**
+ * @brief: Gets 5 digit manufacturer number from user
+ * @param: None
+ * @return: manufacturer number
+ */
 int GetManufacturerNumber()
 {
     int number;
     cout << "Enter the 5-digit manufacturer number: ";
     cin >> number;
 
-    while (number < 10000 || number > 99999)
+    while (number < 10000 || number > 99999) // makes sure it is 5 digits long
     {
         cout << "Invalid input. Enter a 5-digit number: ";
         cin >> number;
@@ -116,14 +136,18 @@ int GetManufacturerNumber()
     return number;
 }
 
-// gets 5 digit product number from user
+/**
+ * @brief: Get 5 digit product number from user
+ * @param: None
+ * @return: product number
+ */
 int GetProductNumber()
 {
     int number;
     cout << "Enter the 5-digit product number: ";
     cin >> number;
 
-    while (number < 10000 || number > 99999)
+    while (number < 10000 || number > 99999) // makes sure it is 5 digits long
     {
         cout << "Invalid input. Enter a 5-digit number: ";
         cin >> number;
@@ -132,7 +156,14 @@ int GetProductNumber()
     return number;
 }
 
-// returns true if the UPC is valid, false otherwise
+/**
+ * @brief: Tests if the numbers the user entered form a valid UPC code using the formula
+ * @param: first first UPC digit
+ * @param: manufacturer 5 digit manufacturer number
+ * @param: product 5 digit product number
+ * @param: last UPC check digit
+ * @return: true if the UPC is valid, false otherwise
+ */
 bool TestValidity(int first, int manufacturer, int product, int last)
 {
     int digits[12];
@@ -180,6 +211,15 @@ bool TestValidity(int first, int manufacturer, int product, int last)
     return calculatedCheckDigit == digits[11];
 }
 
+/**
+ * @brief: Outputs if the UPC entered was valid or not
+ * @param: first first UPC digit
+ * @param: manufacturer 5 digit manufacturer number
+ * @param: product 5 digit product number
+ * @param: last UPC check digit
+ * @param: isValid bool returned from TestValidity to determine the output
+ * @return: None (void)
+ */
 void OutputValidity(int first, int manufacturer, int product, int last, bool isValid)
 {
     if (isValid)

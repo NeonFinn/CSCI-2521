@@ -1,6 +1,8 @@
 #include<iostream>
 #include "Account.h"
 
+using namespace std;
+
 void printMenu();
 int getMenuOption();
 bool isAmountValid(double amount);
@@ -81,7 +83,7 @@ int getMenuOption()
 
 bool isMenuChoiceValid(int choice)
 {
-    return choice >= DEPOSIT and choice <= QUIT;
+    return choice >= DEPOSIT && choice <= QUIT;
 }
 
 bool isAmountValid(double amount)

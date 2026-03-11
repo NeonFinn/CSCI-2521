@@ -1,3 +1,10 @@
+/**
+ * @file Source.cpp
+ * @author Finn Baldwin
+ * @date 2026-03-10
+ * @brief A banking simulation interacting with Account and Customer objects.
+ */
+
 #include<iostream>
 #include "Account.h"
 
@@ -14,6 +21,11 @@ const int WITHDRAWAL = 2;
 const int CLOSE_OF_BUSINESS = 3;
 const int QUIT = 4;
 
+/**
+ * @brief Entry point for the banking simulation
+ * @param None
+ * @return 0 when sucessful
+ */
 int main()
 {
     // just use dummy data for now for the customer and the account
@@ -28,24 +40,48 @@ int main()
         switch (menuChoice)
         {
         case DEPOSIT:
-            /* 
-            TODO: Gather the deposit amount input and validate it is > 0.
-            Add the code that interacts with the account object to add
-            a deposit to the account.
-            */
+        {
+            double depositAmount;
+
+            cout << "Enter the amount you would like to deposit: $";
+            cin >> depositAmount; 
+
+            if (isAmountValid)
+            {
+                account.deposit(depositAmount);
+                cout << "Deposit successful\n";
+            }
+
+            else
+            {
+                cout << "Invalid amount. Your deposit must be greater than 0.\n";
+            }
             break;
+        }
         case WITHDRAWAL:
-            /*
-            TODO: Gather the withdrawal amount input and validate it is > 0.
-            Add the code that interacts with the account object to add
-            a widthdrawal to the account.
-            */
+            {
+            double withdrawlAmount;
+
+            cout << "Enter the amount you would like to withdrawl: $";
+            cin >> withdrawlAmount; 
+
+            if (isAmountValid)
+            {
+                account.withdraw(withdrawlAmount);
+                cout << "Withdrawl successful\n";
+            }
+
+            else
+            {
+                cout << "Invalid amount. Your withdrawl must be greater than 0.\n";
+            }
             break;
+        }
         case CLOSE_OF_BUSINESS:
-            /*
-            TODO: Add the code that interacts with the account object to perform
-            the close of business account balancing.
-            */
+            {
+            account.closeOfBusiness();
+            account.printAccountInfo(); // shows balance details after closing
+            }
             break;
         }
 

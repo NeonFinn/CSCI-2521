@@ -1,5 +1,7 @@
 #include<iostream>
 #include "Account.h"
+#include <numeric>
+using namespace std;
 
 void printMenu();
 int getMenuOption();
@@ -15,13 +17,66 @@ const int WITHDRAWAL = 2;
 const int CLOSE_OF_BUSINESS = 3;
 const int QUIT = 4;
 
+// SavingsAccount inheriting from Account
+class SavingsAccount : public Account
+{
+private:
+    double dailyInterestRate;
+
+public:
+    /**
+    * @brief SavingsAccount object.
+    * @param accNum The account number.
+    * @param initBal The initial balance.
+    * @param cust The customer associated with the account.
+    * @param rate The daily interest rate.
+    */
+    SavingsAccount(const string& accNum, double initBal, const Customer& cust, double rate) 
+        : Account(accNum, initBal, cust), dailyInterestRate(rate)
+    {
+    }
+
+    /**
+    * @brief Processes transactions and applies interest if applicable.
+    */
+    void closeOfBusiness() override
+    {
+        double totalDeposits = accumulate(deposits.begin(), deposits.end(), 0.0);
+        double totalWithdrawals = accumulate(withdrawals.begin(), withdrawals.end(), 0.0);
+
+        double previousBalance = balance;
+
+        balance = previousBalance + totalDeposits - totalWithdrawals;
+
+        // Apply interest only if balance is positive
+        if (balance > 0)
+        {
+            balance = balance + (balance * dailyInterestRate);
+        }
+
+        printSummary(previousBalance, totalDeposits, totalWithdrawals, balance);
+
+        deposits.clear();
+        withdrawals.clear();
+    }
+
+    /**
+    * @brief Prints account information with the new interest rate.
+    */
+    void printAccountInfo() const override
+    {
+        Account::printAccountInfo();
+        cout << "Daily Interest Rate: " << dailyInterestRate * 100 << "%" << endl;
+    }
+};
+
 int main()
 {
     // just use dummy data for now for the customer and the account
     // we care about interacting with account object for this lab
     Customer customer("0123456789", "customer@cscc.edu");
-    Account account("5423678409", 100.00, customer);
-    account.printAccountInfo();
+    Account* account = new SavingsAccount("5423678409", 100.00, customer, 0.005);
+    account->printAccountInfo();
 
     int menuChoice = getMenuOption();
     while (menuChoice != QUIT)
@@ -32,14 +87,14 @@ int main()
         {
         case DEPOSIT:
             deposit = getDepositAmount();
-            account.deposit(deposit);
+            account->deposit(deposit);
             break;
         case WITHDRAWAL:
             withdrawal = getWithdrawalAmount();
-            account.withdraw(withdrawal);
+            account->withdraw(withdrawal);
             break;
         case CLOSE_OF_BUSINESS:
-            account.closeOfBusiness();
+            account->closeOfBusiness();
             break;
         }
 
@@ -77,7 +132,7 @@ int getMenuOption()
 
 bool isMenuChoiceValid(int choice)
 {
-    return choice >= DEPOSIT and choice <= QUIT;
+    return choice >= DEPOSIT && choice <= QUIT;
 }
 
 bool isAmountValid(double amount)

@@ -7,7 +7,7 @@
 using namespace std;
 
 class Account {
-private:
+protected:
     string accountNumber;
     double balance;
     Customer owner;
@@ -24,13 +24,13 @@ public:
     bool deposit(double amount);
     bool withdraw(double amount);
 
-    void closeOfBusiness();
+    virtual void closeOfBusiness();
 
     double getBalance() const;
     string getAccountNumber() const;
     Customer getCustomer() const;
 
-    void printAccountInfo() const;
+    virtual void printAccountInfo() const;
     void printTransactions() const;
 };
 

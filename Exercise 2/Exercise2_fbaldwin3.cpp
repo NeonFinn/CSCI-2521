@@ -26,29 +26,29 @@ public:
      */
     MorseCodeTranslator()
     {
-        morseTable[0] = ".-";    // A
-        morseTable[1] = "-...";  // B
-        morseTable[2] = "-.-.";  // C
-        morseTable[3] = "-..";   // D
-        morseTable[4] = ".";     // E
-        morseTable[5] = "..-.";  // F
-        morseTable[6] = "--.";   // G
-        morseTable[7] = "....";  // H
-        morseTable[8] = "..";    // I
-        morseTable[9] = ".---";  // J
-        morseTable[10] = "-.-";  // K
+        morseTable[0] = ".-"; // A
+        morseTable[1] = "-..."; // B
+        morseTable[2] = "-.-."; // C
+        morseTable[3] = "-.."; // D
+        morseTable[4] = "."; // E
+        morseTable[5] = "..-."; // F
+        morseTable[6] = "--."; // G
+        morseTable[7] = "...."; // H
+        morseTable[8] = ".."; // I
+        morseTable[9] = ".---"; // J
+        morseTable[10] = "-.-"; // K
         morseTable[11] = ".-.."; // L
-        morseTable[12] = "--";   // M
-        morseTable[13] = "-.";   // N
-        morseTable[14] = "---";  // O
+        morseTable[12] = "--"; // M
+        morseTable[13] = "-."; // N
+        morseTable[14] = "---"; // O
         morseTable[15] = ".--."; // P
         morseTable[16] = "--.-"; // Q
-        morseTable[17] = ".-.";  // R
-        morseTable[18] = "...";  // S
-        morseTable[19] = "-";    // T
-        morseTable[20] = "..-";  // U
+        morseTable[17] = ".-."; // R
+        morseTable[18] = "..."; // S
+        morseTable[19] = "-"; // T
+        morseTable[20] = "..-"; // U
         morseTable[21] = "...-"; // V
-        morseTable[22] = ".--";  // W
+        morseTable[22] = ".--"; // W
         morseTable[23] = "-..-"; // X
         morseTable[24] = "-.--"; // Y
         morseTable[25] = "--.."; // Z
@@ -83,7 +83,7 @@ public:
         // if its a valid letter
         if (letter >= 'A' && letter <= 'Z')
         {
-            // find its alphabetical position and return the correct morse code
+            // find its alphabetical position and return the corresponding morse code
             return morseTable[letter - 'A'];
         }
         // ignore if its not a letter
@@ -108,16 +108,16 @@ public:
             // translate it to morse code
             string morseSymbol = translateCharacter(sentence[i]);
 
-            // add if its valid
+            // if it is valid
             if (morseSymbol != "")
             {
-                // space between symbols
+                // add space between symbols
                 if (result != "")
                 {
                     result += " ";
                 }
 
-                // add the morse code to the result
+                // add the morse code to the previous result
                 result += morseSymbol;
             }
         }
@@ -172,7 +172,10 @@ private:
         cin >> choice;
         cin.ignore(1000, '\n');
 
+        // makes user input lowercase for easier checking
         choice = tolower(static_cast<unsigned char>(choice));
+
+        // returns true if the user enters y
         return choice == 'y';
     }
 

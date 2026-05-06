@@ -31,13 +31,7 @@ string WordGenerator::getRandomizedWord()
 		"near"
 	};
 
-	string word = words[getRandomNumber()];
-	if (isDebug)
-	{
-		cout << "Hidden word is " << word << endl;
-	}
-
-	return word;
+	return words[getRandomNumber()];
 }
 
 int WordGenerator::getRandomNumber()

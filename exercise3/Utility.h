@@ -1,7 +1,7 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
-#include "StandardIncludes.h";
+#include "StandardIncludes.h"
 
 class Utility
 {

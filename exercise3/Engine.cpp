@@ -12,12 +12,15 @@ TODO: deallocate any pointers used by this class
 */
 Engine::~Engine()
 {
-
+	delete catsAndCougars;
+	delete validation;
+	delete wordGenerator;
 }
 
 void Engine::play()
 {
 	// TODO: call the Instructions static print function
+		Instructions::print();
 
 	do
 	{
@@ -38,12 +41,26 @@ void Engine::play()
 			If the player did not win, call the incorrectGuess function and increment the
 			currentRound variable.
 			*/
+
+			// check to see if the player guessed the word
+			if (didPlayerWin(hiddenWord, playerGuess))
+			{
+				playerWins();
+				winner = true;
+				break;
+			}
+			else
+			{
+				incorrectGuess(hiddenWord, playerGuess);
+				currentRound++;
+			}
 		}
 
-		/*
-		TODO: interrogate the winner bool variable. If the player is not a winner, call
-		the playerLoses function to output the losing message.
-		*/
+		// if the player did not win in set amount of rounds show them that they lost
+		if (!winner)
+		{
+			playerLoses();
+		}
 
 	} while (playAgain());
 }
